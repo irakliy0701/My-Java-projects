@@ -10,10 +10,6 @@ import Players.*;
 
 import static Statics_constants.Constants.*;
 
-/**
- * @author <a href="mailto:mishklyar@edu.hse.ru"> Mike Shklyar</a>
- */
-
 // Класс игрового поля.
 public class GameField {
     // Список клеток игрового поля. (Делаем его одномерным для экономии памяти)
