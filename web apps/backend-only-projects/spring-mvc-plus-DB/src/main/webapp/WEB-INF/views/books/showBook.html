@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+<p th:text="${book.getBookName() + ', ' + book.getAuthor() + ', ' +
+                    book.getReleaseYear()}">VALUE</p>
+
+<!--Дописать условие на показ человека, который взял эту книгу + сделать
+кнопку с возможностью освободить книгу (через div и th:if)
+или  если книга никому не принадлежит - выводить об этом сообщение и предлагать назначить
+ее какому-то пользователю (в виде выпдающ списка)-->
+<div th:if="${owner}">
+    <span>Книга сейчас у: </span> <span th:text="${owner.getPhio()}">Person Name</span>
+
+    <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}">
+        <input type="submit" value="Освободить книгу"/>
+    </form>
+</div>
+
+<div th:if="${people}">
+    <span>Эта книга свободна. Кому назначить ее?</span>
+    <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
+        <label for="person">Выберите человека</label>
+        <select th:object="${person}" th:field="*{id}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getPhio()}">
+            </option>
+        </select>
+        <input type="submit" value="Назначить книгу"/>
+    </form>
+</div>
+
+<hr/>
+
+<a th:href="@{/books/{id}/edit(id=${book.getId()})}">Редактировать</a>
+
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+    <input type="submit" value="Удалить"/>
+</form>
+</body>
+</html>
