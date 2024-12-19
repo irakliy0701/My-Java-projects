@@ -1,4 +1,4 @@
-Vue3.js project - SPA
+### Vue3.js project - SPA
 
 ## Project setup
 ```
